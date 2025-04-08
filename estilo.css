@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,20 +7,26 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-color: #0730c5;
+  --secondary-color: #f5f7fd;
+  --danger-color: #ff2b00;
+  --success-color: #23da95;
+}
+
 body {
-  background: #f5f7fd;
+  background: var(--secondary-color);
   font-size: 14px;
-  font-weight: 400;
   color: #020f3c;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   margin-top: 40px;
   min-height: 100vh;
 }
 
 .content {
-  background-color: #ffffff;
+  background: #fff;
   padding: 20px;
   border-radius: 20px;
   width: 90%;
@@ -33,10 +40,9 @@ h1 {
   margin: 20px 0;
 }
 
-h3 span {
-  color: #0730c5;
-}
+h3 span { color: var(--main-color); }
 
+/* Contenedores principales */
 .container {
   width: 100%;
   display: flex;
@@ -47,11 +53,12 @@ h3 span {
   min-height: 450px;
 }
 
+/* Área de arrastrar */
 .drop-area {
   flex: 1 1 400px;
   min-width: 300px;
   max-width: 435px;
-  border: 2px dashed #0730c5;
+  border: 2px dashed var(--main-color);
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -60,12 +67,12 @@ h3 span {
   transition: all 0.1s ease-in;
   margin: 10px;
   aspect-ratio: 1/1.03;
-}
-
-.drop-area:hover {
-  transform: scale(0.995);
-  opacity: 0.6;
-  filter: brightness(0.5);
+  
+  &:hover {
+    transform: scale(0.995);
+    opacity: 0.6;
+    filter: brightness(0.5);
+  }
 }
 
 #form {
@@ -73,12 +80,13 @@ h3 span {
   height: 100%;
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   padding: 20px;
 }
 
+/* Elementos interactivos */
 .file-input {
   position: absolute;
   top: 0;
@@ -90,27 +98,23 @@ h3 span {
   z-index: 1;
 }
 
-form p {
-  color: #0730c5;
-  font-size: 1.1em;
-}
-
 .Btn {
-  background-color: #0730c5;
+  background: var(--main-color);
   z-index: 2;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 40px;
   width: 160px;
-  justify-content: center;
   border-radius: 10px;
-  cursor: pointer;
   color: white;
   border: none;
   font-size: 1em;
   transition: transform 0.2s;
+  cursor: pointer;
 }
 
+/* Lista de archivos - CORRECCIÓN APLICADA AQUÍ */
 .container2 {
   flex: 1 1 400px;
   min-width: 300px;
@@ -119,152 +123,48 @@ form p {
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: #f5f7fd;
+  background: var(--secondary-color);
   max-height: 430px;
   overflow-y: auto;
   margin: 10px;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+    &-track { background: var(--secondary-color); }
+    &-thumb {
+      background: var(--main-color);
+      border-radius: 10px;
+    }
+  }
 }
 
-.btn_delete{
-    border: none;
-    padding: 0;
-    background: none;
-    cursor: pointer;
-}
-.btn_delete:hover{
-  opacity: 0.75;
-}
-button.btn_delete svg {
-  stroke: #ff2b00;
-}
-
-.archivos_subidos{
+.archivos_subidos {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: #fff;
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 8px;
-  align-items: center; 
-}
-.archivos_subidos:hover {
-  box-shadow: 0 0 10px -2px #d3d6f6;
-}
-.archivos_subidos div {
-  overflow: hidden;
-}
-
-.beta{
-  background: #23da95;
-  font-size: 1.2rem;
-  border-radius: 6px;
-  display: inline-block;
-  padding: 0 12px;
-}
-
-/* Media Queries para responsividad */
-@media (max-width: 768px) {
-  .content {
-    padding: 15px;
-    border-radius: 15px;
+  gap: 15px;
+  
+  &:hover {
+    box-shadow: 0 0 10px -2px #d3d6f6;
   }
   
-  h1 {
-    font-size: 2em;
-    margin: 15px 0;
-  }
-  
-  .container {
-    flex-direction: column;
-    min-height: auto;
-  }
-  
-  .drop-area, .container2 {
-    width: 100%;
-    max-width: 100%;
-    margin: 10px 0;
-  }
-  
-  .Btn {
-    width: 140px;
-    height: 35px;
+  div {
+    overflow: hidden;
+    color: #020f3c; /* Color original del texto */
+    text-decoration: none; /* Elimina subrayado */
+    
+    a {
+      color: inherit; /* Hereda el color del padre */
+      text-decoration: none; /* Elimina subrayado en enlaces */
+    }
   }
 }
 
-@media (max-width: 480px) {
-  body {
-    margin-top: 20px;
-    font-size: 13px;
-  }
-  
-  .content {
-    width: 95%;
-    padding: 10px;
-  }
-  
-  h1 {
-    font-size: 1.8em;
-  }
-  
-  .beta {
-    font-size: 1em;
-    padding: 0 8px;
-  }
-  
-  .archivos_subidos {
-    padding: 8px;
-    font-size: 0.9em;
-  }
-  
-  .Btn {
-    width: 130px;
-    font-size: 0.9em;
-  }
-}
-
-@media (hover: none) {
-  .drop-area:hover {
-    transform: none;
-    opacity: 1;
-    filter: none;
-  }
-}
-
-.file-counter {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #0730c5;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.9em;
-  z-index: 3;
-}
-
-.drag-over {
-  background: rgba(7, 48, 197, 0.1) !important;
-  transform: scale(0.98) !important;
-}
-
-#file-list {
-  scrollbar-width: thin;
-  scrollbar-color: #0730c5 #f5f7fd;
-}
-
-#file-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-#file-list::-webkit-scrollbar-track {
-  background: #f5f7fd;
-}
-
-#file-list::-webkit-scrollbar-thumb {
-  background-color: #0730c5;
-  border-radius: 10px;
-}
-
+/* Iconos y miniaturas */
 .file-icon {
   width: 40px;
   min-width: 40px;
@@ -272,19 +172,18 @@ button.btn_delete svg {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  i {
+    font-size: 1.8em;
+    &.fa-file-pdf { color: #e74c3c; }
+    &.fa-file-word { color: #2c3e50; }
+    &.fa-file-excel { color: #27ae60; }
+    &.fa-file-powerpoint { color: #e67e22; }
+    &.fa-file-archive { color: #7f8c8d; }
+    &.fa-file-alt { color: #34495e; }
+    &.fa-file { color: #95a5a6; }
+  }
 }
-
-.file-icon i {
-  font-size: 1.8em;
-}
-
-.fa-file-pdf { color: #e74c3c; }
-.fa-file-word { color: #2c3e50; }
-.fa-file-excel { color: #27ae60; }
-.fa-file-powerpoint { color: #e67e22; }
-.fa-file-archive { color: #7f8c8d; }
-.fa-file-alt { color: #34495e; }
-.fa-file { color: #95a5a6; }
 
 .thumbnail {
   width: 40px;
@@ -295,122 +194,191 @@ button.btn_delete svg {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.archivos_subidos {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 10px 15px;
-}
-
-.file-info {
-  flex-grow: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.boton-descargar {
-  color: #0730c5;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  max-width: 300px;
-}
-
-.boton-descargar:hover {
-  color: #333 !important;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .boton-descargar {
-      max-width: 200px;
-  }
-  
-  .file-icon i {
-      font-size: 1.4em;
-  }
-  
-  .thumbnail {
-      width: 35px;
-      height: 35px;
-  }
-}
-
-/* Nuevos estilos para seguridad */
+/* Elementos de seguridad */
 .password-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.password-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  
+  .password-content {
     background: white;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
     width: 90%;
     max-width: 400px;
+    text-align: center;
+    
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    button {
+      background: var(--main-color);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+      
+      &:hover { background: #0620a0; }
+    }
+  }
+}
+
+/* Botones especiales */
+.error {
+  color: #dc3545;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.btn-download-all {
+  background: transparent;
+  color: #0730c5;
+  border: 2px solid #0730c5;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: block;
+  margin: 30px auto;
+  width: fit-content;
+}
+
+.btn-download-all:hover {
+  background: #0730c5;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(7, 48, 197, 0.3);
+}
+
+.btn_delete {
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  
+  &:hover { opacity: 0.75; }
+  
+  svg { stroke: var(--danger-color); }
+}
+
+/* Elementos responsive */
+@media (max-width: 768px) {
+  .content { padding: 15px; }
+  
+  h1 { font-size: 2em; }
+  
+  .container {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .drop-area, .container2 {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .Btn { width: 140px; }
+}
+
+@media (max-width: 480px) {
+  body { margin-top: 20px; }
+  
+  .content { width: 95%; }
+  
+  h1 { font-size: 1.8em; }
+  
+  .archivos_subidos { padding: 8px; }
+}
+
+.beta {
+  background: var(--success-color);
+  font-size: 1.2rem;
+  border-radius: 6px;
+  display: inline-block;
+  padding: 0 12px;
+}
+
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.password-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
 }
 
 .password-content h3 {
-    color: #333;
-    margin-bottom: 1.5rem;
+  color: #0730c5;
+  margin-bottom: 1.5rem;
 }
 
 .password-content input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #f0f2f5;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.password-content input:focus {
+  border-color: #0730c5;
+  outline: none;
 }
 
 .password-content button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
+  background: #0730c5;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 15px;
+  transition: background 0.3s;
 }
 
 .password-content button:hover {
-    background: #0056b3;
-}
-
-.password-notice {
-    background: #e3f2fd;
-    padding: 15px;
-    margin: 20px 0;
-    border-radius: 8px;
-    border-left: 4px solid #2196F3;
-}
-
-.password-notice button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+  background: #0620a0;
 }
 
 .error {
-    color: #dc3545;
-    margin-top: 15px;
-    font-weight: bold;
+  color: #ff2b00;
+  margin-top: 15px;
+  font-weight: bold;
 }
